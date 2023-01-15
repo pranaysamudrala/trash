@@ -110,7 +110,7 @@ plt.show()
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-dataset=pd.read_csv("Advertising.csv")
+dataset=pd.read_csv("Advertising.csv")#using Advertising Dataset
 dataset.head()
 x=dataset[['TV','radio','newspaper']]
 y=dataset['sales']
@@ -138,7 +138,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 col_names = ['pregnant', 'glucose', 'bp', 'skin', 'insulin',
                   'bmi', 'pedigree', 'age', 'label']
-pima = pd.read_csv("pima.csv", header=None, names=col_names)
+pima = pd.read_csv("pima.csv", header=None, names=col_names)#using pima/diabetes/pima-indian-diabetes dataset
 pima.head()
 feature_cols = ['pregnant', 'insulin', 'bmi', 'age','glucose','bp','pedigree']
 X = pima[feature_cols]
@@ -189,7 +189,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 #matplotlib inline
-bankdata = pd.read_csv("bill_authentication.csv")
+bankdata = pd.read_csv("bill_authentication.csv")#using bill authentication dataset
 bankdata.shape
 bankdata.head()
 X = bankdata.drop('Class', axis=1)
