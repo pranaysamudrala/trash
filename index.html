@@ -43,7 +43,7 @@
   <button class="show-button" onclick="showCode('code-snippet-3')">W6 Logistic R</button>
   <button class="show-button" onclick="showCode('code-snippet-4')">W8(last code) Descision Tree</button>
   <button class="show-button" onclick="showCode('code-snippet-5')">W9(9.1) Random Forest</button>
-  <button class="show-button" onclick="showCode('code-snippet-6')">W10 SVM</button>
+  <button class="show-button" onclick="showCode('code-snippet-6')">W10(10.1) SVM</button>
   <button class="show-button" onclick="showCode('code-snippet-7')">W11 Boosting</button>
   <button class="show-button" onclick="showCode('code-snippet-8')">W12 Bagging</button>
 
@@ -168,23 +168,18 @@ print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
   <pre>
     <code id="code-snippet-6">
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-#matplotlib inline
-bankdata = pd.read_csv("bill_authentication.csv")#using bill authentication dataset
-bankdata.shape
-bankdata.head()
-X = bankdata.drop('Class', axis=1)
-y = bankdata['Class']
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20)
 from sklearn.svm import SVC
-svclassifier = SVC(kernel='linear')
-svclassifier.fit(X_train, y_train)
-y_pred = svclassifier.predict(X_test)
 from sklearn.metrics import classification_report, confusion_matrix
-print(confusion_matrix(y_test,y_pred))
-print(classification_report(y_test,y_pred))
+data = pd.read_csv("bill_authentication.csv")
+X = data.drop('Class', axis=1)
+y = data['Class']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model = SVC(kernel='linear')
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
     </code>
   </pre>
 </div>
