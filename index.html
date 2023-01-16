@@ -103,22 +103,19 @@ plt.show()
     <pre>
       <code id="code-snippet-3">
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-dataset=pd.read_csv("Advertising.csv")#using Advertising Dataset
-dataset.head()
-x=dataset[['TV','radio','newspaper']]
-y=dataset['sales']
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=100)
-mlr=LinearRegression()
-mlr.fit(x_train,y_train)
-print("Intercept:",mlr.intercept_)
-print("Coefficients")
-y_pred_mlr=mlr.predict(x_test)
-print("Prediction for test set: {}".format(y_pred_mlr))
-mlr_diff=pd.DataFrame({'Actual value': y_test, 'Predicted value': y_pred_mlr})
-mlr_diff.head()
+dataset = pd.read_csv("Advertising.csv")#using Advertising Dataset
+x = dataset[['TV', 'radio', 'newspaper']]
+y = dataset['sales']
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=100)
+model = LinearRegression()
+model.fit(x_train, y_train)
+print("Intercept:", model.intercept_)
+print("Coefficients:", model.coef_)
+y_pred = model.predict(x_test)
+print("Prediction for test set:", y_pred)
+pd.DataFrame({'Actual': y_test, 'Predicted': y_pred}).head()
       </code>
     </pre>
   </div>
