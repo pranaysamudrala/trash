@@ -67,11 +67,13 @@ And run this
 
 1a
 
-print(Data)
-Data$Country=factor(Data$Country,
-                    levels=c("France","Germany"),
-                    labels=c(1,2))
-print(Data)
+data = read_csv('data.csv')
+view(data)
+missing_values <- colSums(is.na(data))
+print(missing_values)
+data$Age = ifelse(is.na(data$Age),ave(data$Age, FUN = function (x)mean(x, na.rm = TRUE)), data$Age)
+data$Salary = ifelse(is.na(data$Salary), ave(data$Salary, FUN = function (x)mean(x, na.rm = TRUE)),data$Salary)
+
 
 1b
 
