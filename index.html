@@ -29,7 +29,7 @@
     .copy-button {
       background-color: #555;
       color: #fff;
-      padding: 10px 15px;
+      padding: 5px 10px;
       border: none;
       cursor: pointer;
       float: right;
@@ -44,12 +44,13 @@
   <button class="show-button" onclick="showCode('code-snippet-4')">3b</button>
   <button class="show-button" onclick="showCode('code-snippet-5')">Set 4a</button>
   <button class="show-button" onclick="showCode('code-snippet-6')">4b</button>
+  <button class="show-button" onclick="showCode('code-snippet-7')">Extra Docs</button>
+
 
   <div class="code-snippet" id="code-snippet-1">
-    <button class="copy-button" onclick="copyToClipboard('code-snippet-1')">Copy Code</button>\
-    <div class="code-section" id="code-snippet-1-code">
-      <pre>
-        <code>
+    <button class="copy-button" onclick="copyToClipboard('code-snippet-1')">Copy Code</button>
+    <pre>
+      <code id="code-snippet-1">
 Country,Age ,Salary
 aus,23,1000
 france,45,1000
@@ -106,14 +107,14 @@ IQ <- sort(IQ)
 result <- c(0, 0, 0, 1, 0, 0, 0, 0, 0, 1)
 df <- as.data.frame(cbind(IQ, result))
 print(df)
-</code>
-</pre>
-</div>
+      </code>
+    </pre>
+  </div>
 
-<div class="code-snippet" id="code-snippet-3">
-  <button class="copy-button" onclick="copyToClipboard('code-snippet-3')">Copy Code</button>
-  <pre>
-    <code id="code-snippet-3">
+  <div class="code-snippet" id="code-snippet-3">
+    <button class="copy-button" onclick="copyToClipboard('code-snippet-3')">Copy Code</button>
+    <pre>
+      <code id="code-snippet-3">
 install.packages("arules")
 install.packages("arulesViz")
 install.packages("RColorBrewer")
@@ -125,14 +126,14 @@ rules <- apriori(Groceries, parameter = list(supp=0.1, conf=0.1))
 inspect(rules[1:5])
 arules::itemFrequencyPlot(Groceries, topN=10, col=brewer.pal(3,'Pastel2'), 
                           main='Frequent Itemsets', type="relative", ylab="Support")
-    </code>
-  </pre>
-</div>
+      </code>
+    </pre>
+  </div>
 
-<div class="code-snippet" id="code-snippet-6">
-  <button class="copy-button" onclick="copyToClipboard('code-snippet-4')">Copy Code</button>
-  <pre>
-    <code id="code-snippet-4">
+  <div class="code-snippet" id="code-snippet-4">
+    <button class="copy-button" onclick="copyToClipboard('code-snippet-4')">Copy Code</button>
+    <pre>
+      <code id="code-snippet-4">
 library(tm)
 library(SnowballC)
 text=readLines(file.choose())
@@ -145,10 +146,10 @@ corpus=tm_map(corpus,content_transformer(tolower))
 text
 sapply(corpus,as.character)
 
-Document.txt
+document.txt
 Cleaning123 the text data, the next#@ step is to count the occurrence of each word
-    </code>
-  </pre>
+</code>
+</pre>
 </div>
 
 <div class="code-snippet" id="code-snippet-5">
@@ -186,6 +187,9 @@ print(event)
     </code>
   </pre>
 </div>
+    </code>
+  </pre>
+</div>
 
 <div class="code-snippet" id="code-snippet-6">
   <button class="copy-button" onclick="copyToClipboard('code-snippet-6')">Copy Code</button>
@@ -206,8 +210,135 @@ rect.hclust(Hierar_cl, k = 3, border = "green")
   </pre>
 </div>
 
+<div class="code-snippet" id="code-snippet-7">
+  <button class="copy-button" onclick="copyToClipboard('code-snippet-7')">Copy Code</button>
+  <pre>
+    <code id="code-snippet-7">
+##Import Data and Read the data from Dataset.csv and perform the following task checking for missing values from the dataset.
+
+data = read_csv('data.csv')
+view(data)
+missing_values <- colSums(is.na(data))
+print(missing_values)
+data$Age = ifelse(is.na(data$Age),ave(data$Age, FUN = function (x)mean(x, na.rm = TRUE)), data$Age)
+data$Salary = ifelse(is.na(data$Salary), ave(data$Salary, FUN = function (x)mean(x, na.rm = TRUE)),data$Salary)
+
+##Import Data and Read the data from Dataset.csv and perform the following task Encoding the categorical data
+
+data <- read.csv("C:/Users/SatvikSai/Desktop/data.csv")
+View(data)
+data$Country = factor(data$Country,levels = c('France','Spain','Germany'),labels = c(1.0, 2.0 , 3.0 ))
+data$Purchased = factor(data$Purchased,levels = c('No', 'Yes'),labels = c(0, 1))
+data$Purchased[is.na(data$Purchased)] <- 0
+as.factor(data$Purchased)
+
+##Estimate the prediction error and the accuracy of a model using Validation Set Approach and Leave One Cross-Validation (LOOCV)
+
+install.packages("datarium")
+data("marketing", package = "datarium")
+head(marketing)
+set.seed(123)
+random_sample <- createDataPartition(marketing$sales, p = 0.8, list = FALSE)
+training_dataset  <- marketing[random_sample, ]
+testing_dataset <- marketing[-random_sample, ]
+model <- lm(sales ~., data = training_dataset)
+predictions <- predict(model, testing_dataset)
+data.frame( R2 = R2(predictions, testing_dataset $ sales),
+            RMSE = RMSE(predictions, testing_dataset $ sales),
+            MAE = MAE(predictions, testing_dataset $ sales))
+
+
+##Assume a vector of IQ level of students in a class. Another vector contains the result of the corresponding Students i.e., fail or pass (0 or 1) in an exam
+
+
+IQ <- rnorm(40, 30, 2)
+IQ <- sort(IQ)
+result <- c(0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
+            1, 0, 0, 0, 1, 1, 0, 0, 1, 0,
+            0, 0, 1, 0, 0, 1, 1, 0, 1, 1,
+            1, 1, 1, 0, 1, 1, 1, 1, 0, 1)
+df <- as.data.frame(cbind(IQ, result))
+print(df)
+png(file="LogisticRegressionGFG.png")
+plot(IQ, result, xlab = "IQ Level",
+     ylab = "Probability of Passing")
+g = glm(result~IQ, family=binomial, df)
+curve(predict(g, data.frame(IQ=x), type="resp"), add=TRUE)
+points(IQ, fitted(g), pch=30)
+summary(g)
+dev.off()
+
+##Using Market Basket Analysis Data set perform these Model associa_rules, Item Frequency Plot and Visualizing the model
+
+
+dataset = read.transactions('Market_Basket_Optimisation.csv',
+                            sep = ', ', rm.duplicates = TRUE)
+str(dataset)
+install.packages("arules")
+install.packages("arulesViz")
+library(arules)
+library(arulesViz)
+set.seed = 220 
+associa_rules = apriori(data = dataset,
+                        parameter = list(support = 0.004, confidence = 0.2))
+itemFrequencyPlot(dataset, topN = 10)
+inspect(sort(associa_rules, by = 'lift')[1:10])
+plot(associa_rules, method = "graph",
+     measure = "confidence", shading = "lift")
+
+
+##Write a program for “Stop Words & Stemming process” for a text Document
+
+library(tm)
+library(SnowballC)
+text <- readLines("document.txt")
+corpus <- Corpus(VectorSource(text))
+corpus <- tm_map(corpus, content_transformer(tolower))
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, stemDocument, language = "english")
+cat(as.character(corpus))
+
+##Applying Fuzzy method data analysis of specific categories ('ok','bad','perfect') for weather conditions to organizing college event .
+
+library(fuzzyjoin)
+library(fuzzywuzzyR)
+weather <- read.csv("weather.csv")
+categories <- c("ok", "bad", "perfect")
+weather$condition_match <- fuzzy_left_join(weather, categories, by = "condition", 
+                                           match_fun = stringDist, 
+                                           max_dist = 2, 
+                                           ignore_case = TRUE)$match
+weather$condition_score <- fuzzy_left_join(weather, categories, by = "condition", 
+                                           match_fun = stringDist, 
+                                           max_dist = 2, 
+                                           ignore_case = TRUE)$score
+event <- ifelse(weather$condition_match == "ok", "Outdoor event",
+                ifelse(weather$condition_match == "bad", "Indoor event",
+                       "Perfect weather, outdoor event"))
+print(event)
+
+##Performing Hierarchical Clustering algorithm on the Mtcars dataset (Motor trend car roadset) using hclust().
+
+distance_mat <- dist(mtcars, method = 'euclidean')
+distance_mat
+set.seed(240)  
+Hierar_cl <- hclust(distance_mat, method = "average")
+Hierar_cl
+plot(Hierar_cl)
+abline(h = 110, col = "green")
+fit <- cutree(Hierar_cl, k = 3 )
+fit
+table(fit)
+rect.hclust(Hierar_cl, k = 3, border = "green")
+    </code>
+  </pre>
+</div>
+
+
   <script>
-       function showCode(elementId) {
+    function showCode(elementId) {
       // Get all the code snippets
       var codeSnippets = document.getElementsByClassName("code-snippet");
 
