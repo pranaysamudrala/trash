@@ -38,59 +38,18 @@
 </head>
 <body>
 
-  <button class="show-button" onclick="showCode('code-snippet-1')">Set 1a</button>
-  <button class="show-button" onclick="showCode('code-snippet-2')">1b</button>
-  <button class="show-button" onclick="showCode('code-snippet-3')">Set 2a</button>
-  <button class="show-button" onclick="showCode('code-snippet-4')">2b</button>
-  <button class="show-button" onclick="showCode('code-snippet-5')">Set 3a</button>
-  <button class="show-button" onclick="showCode('code-snippet-6')">3b</button>
-  <button class="show-button" onclick="showCode('code-snippet-7')">Set 4a</button>
-  <button class="show-button" onclick="showCode('code-snippet-8')">4b</button>
+  <button class="show-button" onclick="showCode('code-snippet-1')">Set 1</button>
+  <button class="show-button" onclick="showCode('code-snippet-2')">Set 2</button>
+  <button class="show-button" onclick="showCode('code-snippet-3')">Set 3a</button>
+  <button class="show-button" onclick="showCode('code-snippet-4')">3b</button>
+  <button class="show-button" onclick="showCode('code-snippet-5')">Set 4a</button>
+  <button class="show-button" onclick="showCode('code-snippet-6')">4b</button>
 
   <div class="code-snippet" id="code-snippet-1">
     <button class="copy-button" onclick="copyToClipboard('code-snippet-1')">Copy Code</button>\
     <div class="code-section" id="code-snippet-1-code">
       <pre>
         <code>
-          #need to change
-state_table <- data.frame(key=c("CA", "NY", "WA", "ON", "QU"),
-                          name=c("California", "new York", "Washington", "Ontario", "Quebec"),
-                          country=c("USA", "USA", "USA", "Canada", "Canada"))
-month_table <- data.frame(key=1:12,
-                          desc=c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
-                          quarter=c("Q1","Q1","Q1","Q2","Q2","Q2","Q3","Q3","Q3","Q4","Q4","Q4"))
-prod_table <- data.frame(key=c("Printer", "Tablet", "Laptop"), price=c(225, 570, 1120))
-gen_sales <- function(no_of_recs) {
-  loc <- sample(state_table$key, no_of_recs, replace=T, prob=c(2,2,1,1,1))
-  time_month <- sample(month_table$key, no_of_recs, replace=T)
-  time_year <- sample(c(2012, 2013), no_of_recs, replace=T)
-  prod <- sample(prod_table$key, no_of_recs, replace=T, prob=c(1, 3, 2))
-  unit <- sample(c(1,2), no_of_recs, replace=T, prob=c(10, 3))
-  amount <- unit*prod_table[prod,]$price
-  sales <- data.frame(month=time_month, year=time_year, loc=loc, prod=prod, unit=unit, amount=amount)
-  sales <- sales[order(sales$year, sales$month),]
-  row.names(sales) <- NULL
-  return(sales)
-} 
-sales_fact <- gen_sales(500) 
-head(sales_fact)
-# Build up a cube
-revenue_cube <- tapply(sales_fact$amount, sales_fact[,c("prod", "month", "year", "loc")], FUN=function(x){return(sum(x))})
-revenue_cube
-dimnames(revenue_cube)
-#Slice
-revenue_cube[, "1", "2012",]
-revenue_cube["Tablet", "1", "2012",]
-#Rollup
-apply(revenue_cube, c("year", "prod"), FUN=function(x) {return(sum(x, na.rm=TRUE))})
-      </code>
-    </pre>
-  </div>
-</div>
-  <div class="code-snippet" id="code-snippet-2">
-    <button class="copy-button" onclick="copyToClipboard('code-snippet-2')">Copy Code</button>
-    <pre>
-      <code id="code-snippet-2">
 Country,Age ,Salary
 aus,23,1000
 france,45,1000
@@ -105,6 +64,16 @@ Paste the above data in notepad and save as dataset.csv and import dataset in R
 
 And run this
 
+1a
+
+print(Data)
+Data$Country=factor(Data$Country,
+                    levels=c("France","Germany"),
+                    labels=c(1,2))
+print(Data)
+
+1b
+
 dataset$Country = factor(dataset$Country, 
                          levels = c('aus','france','nz','ind'), 
                          labels = c(1.0, 2.0 , 3.0 ,4.0))
@@ -112,10 +81,12 @@ dataset$Country = factor(dataset$Country,
     </pre>
   </div>
 
-  <div class="code-snippet" id="code-snippet-3">
-    <button class="copy-button" onclick="copyToClipboard('code-snippet-3')">Copy Code</button>
+  <div class="code-snippet" id="code-snippet-2">
+    <button class="copy-button" onclick="copyToClipboard('code-snippet-2')">Copy Code</button>
     <pre>
-      <code id="code-snippet-3">
+      <code id="code-snippet-2">
+2a
+
 install.packages('tidyverse')
 install.packages('caret')
 install.packages('datarium')
@@ -127,13 +98,9 @@ set.seed(125)
 train_control=trainControl(method = 'cv',number=10)
 model=train(sales~.,data=marketing,method='lm',trainControl=train_control)
 print(model)
-      </code>
-    </pre>
-  </div>
-  <div class="code-snippet" id="code-snippet-4">
-    <button class="copy-button" onclick="copyToClipboard('code-snippet-4')">Copy Code</button>
-    <pre>
-      <code id="code-snippet-4">
+
+2b
+
 IQ <- rnorm(10, 30, 2)
 IQ <- sort(IQ)
 result <- c(0, 0, 0, 1, 0, 0, 0, 0, 0, 1)
@@ -143,10 +110,10 @@ print(df)
 </pre>
 </div>
 
-<div class="code-snippet" id="code-snippet-5">
-  <button class="copy-button" onclick="copyToClipboard('code-snippet-5')">Copy Code</button>
+<div class="code-snippet" id="code-snippet-3">
+  <button class="copy-button" onclick="copyToClipboard('code-snippet-3')">Copy Code</button>
   <pre>
-    <code id="code-snippet-5">
+    <code id="code-snippet-3">
 install.packages("arules")
 install.packages("arulesViz")
 install.packages("RColorBrewer")
@@ -163,9 +130,9 @@ arules::itemFrequencyPlot(Groceries, topN=10, col=brewer.pal(3,'Pastel2'),
 </div>
 
 <div class="code-snippet" id="code-snippet-6">
-  <button class="copy-button" onclick="copyToClipboard('code-snippet-6')">Copy Code</button>
+  <button class="copy-button" onclick="copyToClipboard('code-snippet-4')">Copy Code</button>
   <pre>
-    <code id="code-snippet-6">
+    <code id="code-snippet-4">
 library(tm)
 library(SnowballC)
 text=readLines(file.choose())
@@ -184,10 +151,10 @@ Cleaning123 the text data, the next#@ step is to count the occurrence of each wo
   </pre>
 </div>
 
-<div class="code-snippet" id="code-snippet-7">
-  <button class="copy-button" onclick="copyToClipboard('code-snippet-7')">Copy Code</button>
+<div class="code-snippet" id="code-snippet-5">
+  <button class="copy-button" onclick="copyToClipboard('code-snippet-5')">Copy Code</button>
   <pre>
-    <code id="code-snippet-7">
+    <code id="code-snippet-5">
 #not executing
 
 weather.csv
@@ -220,10 +187,10 @@ print(event)
   </pre>
 </div>
 
-<div class="code-snippet" id="code-snippet-8">
-  <button class="copy-button" onclick="copyToClipboard('code-snippet-8')">Copy Code</button>
+<div class="code-snippet" id="code-snippet-6">
+  <button class="copy-button" onclick="copyToClipboard('code-snippet-6')">Copy Code</button>
   <pre>
-    <code id="code-snippet-8">
+    <code id="code-snippet-6">
 distance_mat <- dist(mtcars, method = 'euclidean')
 distance_mat
 set.seed(240)  
