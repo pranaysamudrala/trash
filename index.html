@@ -207,7 +207,7 @@ rect.hclust(Hierar_cl, k = 3, border = "green")
 </div>
 
   <script>
-    function showCode(elementId) {
+       function showCode(elementId) {
       // Get all the code snippets
       var codeSnippets = document.getElementsByClassName("code-snippet");
 
@@ -231,21 +231,6 @@ rect.hclust(Hierar_cl, k = 3, border = "green")
       temp.value = text;
       document.body.appendChild(temp);
       temp.select();
-      function displaySection(elementId, section) {
-      // Get all the code, description and output sections
-      var codeSections = document.getElementsByClassName("code-section");
-      var descriptionSections = document.getElementsByClassName("description-section");
-      var outputSections = document.getElementsByClassName("output-section");
-      for (var i = 0;i < codeSections.length; i++) {
-codeSections[i].style.display = "none";
-descriptionSections[i].style.display = "none";
-outputSections[i].style.display = "none";
-}
-  // Show the selected section
-  var selectedSection = document.getElementById(elementId + "-" + section);
-  selectedSection.style.display = "block";
-}
-
 
       // Copy the text to the clipboard
       navigator.clipboard.writeText(temp.value)
@@ -260,6 +245,8 @@ outputSections[i].style.display = "none";
       // Remove the temporary textarea
       document.body.removeChild(temp);
     }
+
   </script>
+
 </body>
 </html>
